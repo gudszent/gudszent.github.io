@@ -11,36 +11,37 @@ baseurl: ''
 lang: en-US
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Europe/Budapest
+timezone: Asia/Shanghai
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
-title: Gudszent's How-to                          # the main title
+title: Chirpy                          # the main title
 
-tagline: The IT is my Job and Hobby   # it will display as the sub-title
+tagline: A text-focused Jekyll theme   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, Azure, Mikrotik,
-  powershell, scripts, openHAB, SmartHome.
+  A minimal, portfolio, sidebar,
+  bootstrap Jekyll theme with responsive web design
+  and focuses on text presentation.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://gudszent.hu'
+url: ''
 
-author: Gudszent Otto                  # change to your full name
+author: your_full_name                  # change to your full name
 
 github:
-  username: gudszent             # change to your github username
+  username: github_username             # change to your github username
 
 twitter:
-  username: gudszent            # change to your twitter username
+  username: twitter_username            # change to your twitter username
 
 social:
-  name: Gudszent Otto                  # it will shows as the copyright owner in Footer
-  email: gudszent             # change to your email address
+  name: your_full_name                  # it will shows as the copyright owner in Footer
+  email: example@doamin.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/gudszent      # change to your twitter homepage
-    - https://github.com/gudszent       # change to your github homepage
+    - https://twitter.com/username      # change to your twitter homepage
+    - https://github.com/username       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -70,7 +71,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode:   dark
+theme_mode:   # [light|dark]
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
