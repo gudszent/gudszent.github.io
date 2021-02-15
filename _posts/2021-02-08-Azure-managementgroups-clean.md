@@ -10,5 +10,4 @@ tags: [Azure, CAF, Powershell]
 
 ```powershell
 For ($n=0; $n -le 3; $n++) {$groups =Get-AzManagementGroup; Foreach ($i in $groups.Name){remove-AzManagementGroup -GroupId $i; $i}}
-
 ```
