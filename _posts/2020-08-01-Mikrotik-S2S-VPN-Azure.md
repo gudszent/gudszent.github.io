@@ -112,6 +112,7 @@ Add arguments
 ## Update with Automation Account
 
 Create Automation account
+- Modules > Browse Gallery. Need to add AzureRM.profile and AzureRM.Network.
 - Create Credentials
 - Create a powershell Runbook.
 
