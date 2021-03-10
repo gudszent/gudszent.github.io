@@ -109,6 +109,65 @@ Add arguments
 -NoLogo -NonInteractive -file "D:\Backup\PowerShell\Azure_VPN.ps1"
 ```
 
+## Update with Automation Account
+
+Create Automation account
+- Create Credentials
+- Create a powershell Runbook.
+
+```powershell
+#Dynamic DNS Entry for your dynamic IP
+$hostName = "domain.hu"
+$ip = "192.168.1.0/24"
+$DynDNS = [system.net.dns]::GetHostByName($hostName).AddressList.IPAddressToString
+#Azure subscription name
+$SubscriptionName = "Visual Studio Enterprise"
+
+#UPN of a user account with administrative access to the subscription
+$myCredential = Get-AutomationPSCredential -Name 'vpnuser'
+$User = $myCredential.UserName
+$securePassword = $myCredential.Password
+$password = $myCredential.GetNetworkCredential().Password
+
+
+#Build the credential object
+$Creds = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $SecurePassword
+
+#Get the Current Dynamic IP
+[string]$DynIP = ([System.Net.DNS]::GetHostAddresses($DynDNS)).IPAddressToString
+Write-Host "Current Dynamic IP:" $DynIP
+Write-Output "Current Dynamic IP:" $DynIP
+#Log into the Azure Tenant
+Login-AzureRmAccount -Credential $Creds | Out-Null
+#Select the subscription
+Select-AzureRmSubscription -SubscriptionName $SubscriptionName | Out-Null
+#Grab the current LocalNetworkGateway
+$LNG = Get-AzureRmLocalNetworkGateway -ResourceName Home-VPN-LNG -ResourceGroupName Home-GW
+#Output the IP to view
+Write-Host "Current LocalNetworkGateway IP:" $LNG.GatewayIPAddress
+Write-Output "Current LocalNetworkGateway IP:" $LNG.GatewayIPAddress
+Write-Host "Current Dynamic IP:" $DynIP
+Write-Output "Current Dynamic IP:" $DynIP
+
+#Determine if we need to change it
+If($DynIP -ne $LNG.GatewayIpAddress)
+    {
+    Write-Host "Dynamic IP is different to LocalNetworkGateway IP - Updating..."
+    Write-Output "Dynamic IP is different to LocalNetworkGateway IP - Updating..."
+    #Update the IP in the LNG Object
+    $LNG.GatewayIpAddress =$DynIP
+    #Update the LNG Object in Azure. AddressPrefix is required.
+    Set-AzureRmLocalNetworkGateway -LocalNetworkGateway $LNG -AddressPrefix @($ip)
+    }
+else
+    {
+    Write-Host "No changes required"
+    Write-Output "No changes required"
+    }
+```
+
+
+
 ## Mikrotik Setup
 
 With Winbox, we have to create firewall rule and ipsec policy. That will connect the Azure Virtual Gateway and control the network communication. 
