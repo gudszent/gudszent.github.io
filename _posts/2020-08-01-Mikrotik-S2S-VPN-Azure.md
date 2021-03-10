@@ -117,7 +117,7 @@ Create Automation account
 
 ```powershell
 #Dynamic DNS Entry for your dynamic IP
-$hostName = "domain.hu"
+$hostName = "domain.eu"
 $ip = "192.168.1.0/24"
 $DynDNS = [system.net.dns]::GetHostByName($hostName).AddressList.IPAddressToString
 #Azure subscription name
@@ -135,8 +135,6 @@ $Creds = New-Object -TypeName System.Management.Automation.PSCredential -Argumen
 
 #Get the Current Dynamic IP
 [string]$DynIP = ([System.Net.DNS]::GetHostAddresses($DynDNS)).IPAddressToString
-Write-Host "Current Dynamic IP:" $DynIP
-Write-Output "Current Dynamic IP:" $DynIP
 #Log into the Azure Tenant
 Login-AzureRmAccount -Credential $Creds | Out-Null
 #Select the subscription
