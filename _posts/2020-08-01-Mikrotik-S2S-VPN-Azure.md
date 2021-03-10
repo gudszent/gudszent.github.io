@@ -117,7 +117,7 @@ Create Automation account
 - Create a powershell Runbook.
 
 ```powershell
-#Dynamic DNS Entry for your dynamic IP
+##Dynamic DNS Entry for your dynamic IP
 $hostName = "domain.eu"
 $ip = "192.168.1.0/24"
 $DynDNS = [system.net.dns]::GetHostByName($hostName).AddressList.IPAddressToString
